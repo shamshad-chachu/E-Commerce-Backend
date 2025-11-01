@@ -12,19 +12,18 @@ public class Admin {
  @GeneratedValue(strategy = GenerationType.IDENTITY)
  private Long id;
 
- @Column(nullable = false, unique = true)
+ @Column(nullable = false)
  private String username;
 
- @Column(nullable = false, unique = true)
+ @Column(nullable = false)
  private String email;
  
- // NOTE: In a production app, the password must be hashed (e.g., using BCrypt)
  @Column(nullable = false)
  private String password;
 
- // Optional: Role field for finer-grained control (e.g., SUPER_ADMIN, PRODUCT_MANAGER)
- private String role = "ADMIN";
+ private String role;
 
+ 
  public Long getId() {
 	return id;
  }

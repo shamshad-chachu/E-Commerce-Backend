@@ -21,25 +21,6 @@ public class AdminService {
  public AdminService(AdminRepo adminRepo) {
      this.adminRepo = adminRepo;
  }
- 
-// @PostConstruct
-// public void initAdminData() {
-//     // Check if an admin with a known dummy email already exists
-////     if (adminRepo.findByEmail("admin@test.com").isEmpty()) {
-////         System.out.println("No initial admin found. Creating dummy admin user.");
-////         
-////         Admin dummyAdmin = new Admin();
-////         dummyAdmin.setUsername("ADMIN");
-////         dummyAdmin.setEmail("admin@test.com");
-////         // WARNING: Storing plain text password for development simplicity only.
-////         // Replace "password123" with a BCrypt hash in production!
-////         dummyAdmin.setPassword("12345"); 
-////         dummyAdmin.setRole("admin"); 
-////
-////         // Save the dummy admin to the database
-////         adminRepo.save(dummyAdmin);
-//         System.out.println("✅ Dummy Admin created: admin@test.com / password123");
-//     }
 
 
  
@@ -74,7 +55,8 @@ public class AdminService {
      return response;
  }
 
- public Admin Create(Admin data) {
+ public  Admin Create(Admin data) {
+	 System.out.println("in service");
 	return adminRepo.save(data);
  }
  

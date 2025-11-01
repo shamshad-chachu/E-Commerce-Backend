@@ -5,7 +5,10 @@ import com.Coorg.ECommerce.Model.Admin;
 //package com.Coorg.ECommerce.Controller; (or appropriate package)
 
 import com.Coorg.ECommerce.Service.AdminService;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,8 +26,15 @@ public class AdminController {
  }
 
  @PostMapping("/Register")
- public Admin createAdmin( @RequestBody Admin data) {	 
-	 return adminService.Create(data);
+ public ResponseEntity<?> createAdmin( @RequestBody Admin data) {	 
+	 try {
+         Admin res = adminService.Create(data);
+         return ResponseEntity.ok("Update successful: " + res);
+     } catch (ObjectOptimisticLockingFailureException e) {
+         return ResponseEntity.status(HttpStatus.CONFLICT).body("The record was modified by another user. Please reload and try again.");
+     } catch (Exception e) {
+         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+     }
  }
  
  @GetMapping("/")
